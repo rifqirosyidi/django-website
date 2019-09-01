@@ -1,3 +1,16 @@
+{% load static %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'music/style.css' %}">
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Logo -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'music:index'%}">Music App</a>
+        </div>
+    </div>
+</nav>
+
 <img width="200px" src="{{ album.album_logo }}">
 <h1>{{ album.album_title }}</h1>
 <h4>{{ album.artist }}</h4>
