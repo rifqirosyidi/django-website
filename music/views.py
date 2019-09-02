@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.views import generic
 from .models import Album, Song
 
@@ -19,3 +20,12 @@ class AlbumCreate(generic.CreateView):
     model = Album
     fields = '__all__'
 
+
+class AlbumUpdate(generic.UpdateView):
+    model = Album
+    fields = '__all__'
+
+
+class AlbumDelete(generic.DeleteView):
+    model = Album
+    success_url = reverse_lazy('music:index')
