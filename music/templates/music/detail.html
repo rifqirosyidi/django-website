@@ -2,26 +2,45 @@
 
 {% block title %} Album Details {% endblock title %}
 {% block content %}
-    <img width="200px" src="{{ album.album_logo }}">
-    <h1>{{ album.album_title }}</h1>
-    <h4>{{ album.artist }}</h4>
 
-    {% if error_message %}
-    <p>{{ error_message }}</p>
-    {% endif %}
+{% if error_message %}
+<p>{{ error_message }}</p>
+{% endif %}
 
-    <form action="#" method="post">
-        {% csrf_token %}
-        {% for song in album.song_set.all %}
-        <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}"/>
-        <label for="song{{ forloop.counter }}">
-            {{ song.song_title }}
-            {% if song.is_favorite %}
-            <img src="http://i.imgur.com/b9b13Rd.png">
-            {% endif %}
-        </label>
-        <br>
-        {% endfor %}
-        <input type="submit" value="Favorite">
-    </form>
+<div class="row">
+    <div class="col-md-4 text-center album-detail-side">
+        <div class="container">
+            <img class="mb-4 image-detail" width="250px" height="250px" src="{{ album.album_logo }}" alt="">
+            <h1 class="jumbotron-heading">{{ album.album_title}}</h1>
+            <p class="lead text-muted">{{ album.album_title }} - {{ album.artist }}<br>
+                <small class="text-muted">{{ album.genre }}</small>
+            </p>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table">
+            <thead class="thead-dark">
+            <button class="btn btn-primary mb-2"><i class="fa fa-plus"></i> Add New Song</button>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Title</th>
+                <th scope="col">Artist</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for song in album.song_set.all %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ song.song_title }}</td>
+                <td>{{ song.album.artist}}</td>
+                <td></td>
+            </tr>
+            {% endfor %}
+            <tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {% endblock content%}

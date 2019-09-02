@@ -13,3 +13,9 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Album
     template_name = 'music/detail.html'
+
+
+class AlbumCreate(generic.CreateView):
+    model = Album
+    fields = '__all__'
+
