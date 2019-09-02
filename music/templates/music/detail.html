@@ -1,35 +1,27 @@
-{% load static %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="{% static 'music/style.css' %}">
+{% extends 'music/base.html' %}
 
-<nav class="navbar navbar-dark bg-dark mb-4">
-    <div class="container-fluid">
-        <!-- Logo -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'music:index'%}">Music App</a>
-        </div>
-    </div>
-</nav>
+{% block title %} Album Details {% endblock title %}
+{% block content %}
+    <img width="200px" src="{{ album.album_logo }}">
+    <h1>{{ album.album_title }}</h1>
+    <h4>{{ album.artist }}</h4>
 
-<img width="200px" src="{{ album.album_logo }}">
-<h1>{{ album.album_title }}</h1>
-<h4>{{ album.artist }}</h4>
-
-{% if error_message %}
+    {% if error_message %}
     <p>{{ error_message }}</p>
-{% endif %}
+    {% endif %}
 
-<form action="{% url 'music:favorite' album.id %}" method="post">
-    {% csrf_token %}
-    {% for song in album.song_set.all %}
-        <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}" />
+    <form action="{% url 'music:favorite' album.id %}" method="post">
+        {% csrf_token %}
+        {% for song in album.song_set.all %}
+        <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}"/>
         <label for="song{{ forloop.counter }}">
             {{ song.song_title }}
-                {% if song.is_favorite %}
-                    <img src="http://i.imgur.com/b9b13Rd.png">
-                {% endif %}
+            {% if song.is_favorite %}
+            <img src="http://i.imgur.com/b9b13Rd.png">
+            {% endif %}
         </label>
         <br>
-    {% endfor %}
-    <input type="submit" value="Favorite">
-</form>
+        {% endfor %}
+        <input type="submit" value="Favorite">
+    </form>
+{% endblock content%}
