@@ -7,7 +7,7 @@
     {% for album in album_list %}
         <div class="col-md-3">
         <div class="card mb-3 shadow-sm" height="100px">
-            <img class="img-fluid size-same" src="{{ album.album_logo }}">
+            <img class="img-fluid size-same" src="{{ album.album_logo.url }}">
             <div class="card-body">
                 <h4>{{ album.album_title }}</h4>
                 <p class="card-text">{{ album }}</p>
